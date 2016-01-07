@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  x_position: 1
+  y_position: 1
+  player_id: 
+  game_id: 
+  captured: false
+  color: MyString
+
+two:
+  x_position: 1
+  y_position: 1
+  player_id: 
+  game_id: 
+  captured: false
+  color: MyString
