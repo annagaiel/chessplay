@@ -5,5 +5,6 @@ class Player < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :fullname, presence: true, length: {maximum: 50}
-  has_many :games
+  has_many :games, dependent: :destroy
+  has_many :pieces, dependent: :destroy
 end
