@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   resources :games
+  resources :offers
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
