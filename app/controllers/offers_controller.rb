@@ -9,12 +9,17 @@ class OffersController < ApplicationController
   end
 
   def create
-    @offer = Offer.new(params[:offer_params])
+    @offer = Offer.new(offer_params)
     if @offer.save
-      redirect_to offers_path
+      redirect_to offer_path(@offer), notice: "Offer was Saved!"
     else
+      flash.now[:alert] = "Offer was not created"
       render 'new'
     end
+  end
+
+  def show
+    @offer = Offer.find(params[:id])
   end
 
   private
