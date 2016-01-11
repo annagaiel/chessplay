@@ -2,7 +2,7 @@
   <h1>Games at Chess Play</h1>
   <div class="col-xs-10 col-xs-offset-1">
   <% @games.each do |g| %>
-    <%= link_to g.name, game_path(g) %>
+    <%= link_to g, game_path(g) %>
   <% end %>
   </div>
 </div>

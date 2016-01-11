@@ -1,13 +1,17 @@
 <div class="col-xs-10 col-xs-offset-1">
   <h1>New Game Offer</h1>
+
   <%= simple_form_for @offer do |f| %>
-     <div class="form-group">
-        <%= f.input :days_per_turn, collection: [[1,1],[2,2],[3,3],[5,5],[7,7],[10,10],[14,14]], selected: 1 %>
-        <%= f.input :play_as, collection: [['Random', :random], ['White', :white], ['Black', :black]], selected: :random %>
-        <%= f.input :rated, collection: [['Yes', :yes],['No', :no], ['Takeback', :takeback]], selected: :no %>
-     </div>
-     <div class="actions">
-        <%= f.submit "Submit", :class => 'btn btn-primary' %>
-     </div>
+    <div class="form-group">
+    <%= f.label :days_per_turn, 'Days Per Turn' %>
+    <%= f.select :days_per_turn, [ 1, 2, 3, 5, 7, 10, 14 ], selected: '1' %>
+    <%= f.label :play_as, 'I Play As' %>
+    <%= f.select :play_as, [ 'Random', 'White', 'Black' ], selected: 'Random' %>
+    <%= f.label :rated, 'Rated' %>
+    <%= f.select :rated, [ 'Yes', 'No', 'Takeback' ], selected: 'No' %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Submit", :class => 'btn btn-primary' %>
+    </div>
   <% end %>
 </div>

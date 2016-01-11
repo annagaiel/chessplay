@@ -1,5 +1,12 @@
-class DeviseCreatePlayers < ActiveRecord::Migration
+class CreateTables < ActiveRecord::Migration
   def change
+    create_table :games do |t|
+      t.integer :white_player
+      t.integer :black_player
+
+      t.timestamps null: false
+    end
+
     create_table(:players) do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
@@ -30,6 +37,7 @@ class DeviseCreatePlayers < ActiveRecord::Migration
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      t.string :fullname
 
       t.timestamps null: false
     end
@@ -38,5 +46,23 @@ class DeviseCreatePlayers < ActiveRecord::Migration
     add_index :players, :reset_password_token, unique: true
     # add_index :players, :confirmation_token,   unique: true
     # add_index :players, :unlock_token,         unique: true
+
+    create_table :pieces do |t|
+      t.integer :x_position
+      t.integer :y_position
+      t.references :player, index: true, foreign_key: true
+      t.references :game, index: true, foreign_key: true
+      t.boolean :captured
+      t.string :color
+    end
+
+    create_table :offers do |t|
+      t.references :player, index: true, foreign_key: true
+      t.integer :days_per_turn
+      t.string :play_as
+      t.string :rated
+
+      t.timestamps null: false
+    end
   end
 end

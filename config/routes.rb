@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   resources :games
-  resources :offers
+  resources :offers do
+    member do
+      get 'accept_game'
+    end
+  end
 
 
   # The priority is based upon order of creation: first created -> highest priority.

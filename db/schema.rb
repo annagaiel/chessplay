@@ -11,17 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160110013519) do
+ActiveRecord::Schema.define(version: 20160107121426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "white_player_id"
-    t.integer  "black_player_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "white_player"
+    t.integer  "black_player"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "offers", force: :cascade do |t|
@@ -36,14 +35,12 @@ ActiveRecord::Schema.define(version: 20160110013519) do
   add_index "offers", ["player_id"], name: "index_offers_on_player_id", using: :btree
 
   create_table "pieces", force: :cascade do |t|
-    t.integer  "x_position"
-    t.integer  "y_position"
-    t.integer  "player_id"
-    t.integer  "game_id"
-    t.boolean  "captured"
-    t.string   "color"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "x_position"
+    t.integer "y_position"
+    t.integer "player_id"
+    t.integer "game_id"
+    t.boolean "captured"
+    t.string  "color"
   end
 
   add_index "pieces", ["game_id"], name: "index_pieces_on_game_id", using: :btree
@@ -60,9 +57,9 @@ ActiveRecord::Schema.define(version: 20160110013519) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "fullname"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "fullname"
   end
 
   add_index "players", ["email"], name: "index_players_on_email", unique: true, using: :btree

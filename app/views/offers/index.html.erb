@@ -1,11 +1,29 @@
 <div class="col-xs-10 col-xs-offset-1">
-  <h1>Available Offer Games at Chess Play</h1>
+  <h1 class="text-center">Available Games at Chess Play</h1>
   <div class="col-xs-10 col-xs-offset-1">
-  <% @offers.each do |o| %>
-    <%= o.days_per_turn %>
-    <%= o.play_as %>
-    <%= o.rated %>
-    <%= link_to 'Play Now', offer_path(o) %>
-  <% end %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Player Name</th>
+        <th>Days Per Turn</th>
+        <th>Play As</th>
+        <th>Rated</th>
+        <th>Play Now</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @offers.each do |o| -%>
+        <tr>
+          <td><%= o.player.fullname %></td>
+          <td><%= o.days_per_turn %></td>
+          <td><%= o.play_as %></td>
+          <td><%= o.rated %></td>
+          <td>
+            <%= link_to 'Accept', accept_game_offer_path(o)%>
+          </td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
   </div>
 </div>

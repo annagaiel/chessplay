@@ -25,12 +25,13 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li>
-          <%= link_to new_game_path do %>
+          <%= link_to new_offer_path do %>
             <i class="glyphicon glyphicon-plus-sign"></i>
             New Game
           <% end %>
         </li>
-        <li><%= link_to 'View All Games', games_path %></li>
+        <li><%= link_to 'View All Open Games', offers_path %></li>
+        <li><%= link_to 'View All My Games', games_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if player_signed_in? %>
