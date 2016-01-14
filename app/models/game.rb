@@ -5,6 +5,9 @@ class Game < ActiveRecord::Base
 
   after_create :populate_board!
 
+  belongs_to :white, class_name: 'Player', foreign_key: 'white_player'
+  belongs_to :black, class_name: 'Player', foreign_key: 'black_player'
+
   def populate_board!
 
     0.upto(7) do |x|

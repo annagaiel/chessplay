@@ -1,8 +1,21 @@
 <div class="col-xs-10 col-xs-offset-1">
   <h1>Games at Chess Play</h1>
   <div class="col-xs-10 col-xs-offset-1">
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Matched Games</th>
+    </tr>
+  </thead>
+  <tbody>
   <% @games.each do |g| %>
-    <%= link_to g, game_path(g) %>
+    <tr>
+      <td>
+    <%= link_to "#{g.white.fullname} vs #{g.black.fullname}", game_path(g) %>
+      </td>
+    </tr>
   <% end %>
+  </tbody>
+  </table>
   </div>
 </div>

@@ -1,4 +1,6 @@
 class OffersController < ApplicationController
+  # before_action :authenticate_player!, :only => [:index, :new, :create, :accept_game]
+
 
   def index
     @offers = Offer.includes(:player).all
@@ -23,25 +25,38 @@ class OffersController < ApplicationController
     @offer = Offer.includes(:player).find(params[:id])
   end
 
+  def create_game(white, black)
+    g = Game.new
+    g.white = white
+    g.black = black
+    g.save
+    g
+  end
+
   def accept_game
     @offer = Offer.includes(:player).find(params[:id])
     @offer_player = @offer.player
     @player_that_accepts_the_offer = current_player
-    @game = Game.create()
-    if @offer.play_as == "Random"
+    if @offer.player == current_player
+      return render 'index', notice: 'Not Allowed'
+    end
+    @game = if @offer.play_as == "Random"
       if ["White", "Black"].sample == "White"
-        @game.update_attributes(white_player: @offer_player.id, black_player: @player_that_accepts_the_offer.id)
+        create_game(@offer_player, @player_that_accepts_the_offer)
       else
-        @game.update_attributes(white_player: @player_that_accepts_the_offer.id, black_player: @offer_player.id)
+        create_game(@player_that_accepts_the_offer, @offer_player)
       end
     elsif @offer.play_as == "White"
-      @game.update_attributes(white_player: @offer_player.id, black_player: @player_that_accepts_the_offer.id)
+      create_game(@offer_player, @player_that_accepts_the_offer)
     elsif @offer.play_as == "Black"
-      @game.update_attributes(white_player: @player_that_accepts_the_offer.id, black_player: @offer_player.id)
+      create_game(@player_that_accepts_the_offer, @offer_player)
     end
 
-    @offer.destroy
-    redirect_to game_path(@game)
+    if @game.valid?
+      @offer.destroy
+      redirect_to game_path(@game)
+    end
+
   end
 
   private

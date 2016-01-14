@@ -1,3 +1,16 @@
 <div class="col-xs-10 col-xs-offset-1">
   <h1><%= @black_player.fullname %> vs <%= @white_player.fullname %></h1>
+  <div id="board" style="width: 400px"></div>
+
 </div>
+
+<script>
+var init = function() {
+//--- start example JS ---
+var board = ChessBoard('board', 'start');
+//--- end example JS ---
+
+}; // end init()
+$(document).ready(init);
+$(document).on('page:load', init);
+</script>
